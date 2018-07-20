@@ -10,5 +10,5 @@ let data = {
 router.get('/', function(req, res, next) {
   res.render('test', data);
 });
-
+// 
 module.exports = router;
