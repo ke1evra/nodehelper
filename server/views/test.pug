@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= name
-  p= text
+  h1 Тест CSV
+  table.table.table-bordered.table-hover.table-sm.table-dark
+    each item in data
+      tr
+        each sub in item
+          td=sub

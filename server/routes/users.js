@@ -1,5 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var csv = require('fast-csv');
+var fs = require('fs');
+
+let parsedData = [];
+
+
+//, {encoding: "utf8"}
+  let stream = fs.createReadStream("my1.csv", { encoding: 'ascii' });
+  let csvStream = csv
+      .parse({delimiter:';'})
+      .on("data", function(data){
+           console.log(data);
+           parsedData.push(data);
+      })
+      .on("end", function(){
+           console.log("done");
+           // console.log(parsedData);
+      });
+  stream.pipe(csvStream);
+  // console.log(`csvStream ${JSON.stringify(csvStream)}`);
+
+
+
+
+
 let data = {
   name: "test",
   id: "1",
@@ -8,7 +33,11 @@ let data = {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('test', data);
+
+
+  console.log(parsedData);
+
+  res.render('test', {data: parsedData});
 });
-// 
+//
 module.exports = router;
