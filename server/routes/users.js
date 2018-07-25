@@ -11,27 +11,20 @@ let parsedData = [];
 
 
 //, {encoding: "utf8"}
-  let stream = fs.createReadStream("my1.csv", { encoding: 'binary' });
+  let stream = fs.createReadStream("my1.csv");
   let csvStream = csv
       .parse({delimiter:';'})
       .on("data", function(data){
            // console.log(data);
            parsedData.push(data);
-           let dataBinary = iconv.decode(data, "binary");
-           let dataWin1252 = iconv.decode(dataBinary, "win1251");
-           console.log(dataWin1252);
 
       })
       .on("end", function(){
            console.log("done");
-           // console.log(parsedData);
       });
-  stream.pipe(csvStream);
-  // console.log(`csvStream ${JSON.stringify(csvStream)}`);
-
-
-
-
+  stream
+    .pipe(iconv.decodeStream('win1251'))
+    .pipe(csvStream);
 
 let data = {
   name: "test",
