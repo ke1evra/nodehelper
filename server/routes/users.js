@@ -3,28 +3,29 @@ var router = express.Router();
 var csv = require('fast-csv');
 var fs = require('fs');
 var iconv = require('iconv-lite');
-// var Buffer = require('buffer');
-// var Iconv  = require('iconv').Iconv();
-// var iconv = new Iconv('windows-1252', 'UTF8');
+
 
 let parsedData = [];
 
 
-//, {encoding: "utf8"}
-  let stream = fs.createReadStream("my1.csv");
-  let csvStream = csv
-      .parse({delimiter:';'})
-      .on("data", function(data){
-           // console.log(data);
-           parsedData.push(data);
 
-      })
-      .on("end", function(){
-           console.log("done");
-      });
-  stream
-    .pipe(iconv.decodeStream('win1251'))
-    .pipe(csvStream);
+let stream = fs.createReadStream("my1.csv");
+let csvStream = csv
+  .parse({
+    delimiter: ';',
+    headers: true
+  })
+  .on("data", function(data) {
+    // console.log(data);
+    parsedData.push(data);
+
+  })
+  .on("end", function() {
+    console.log("done");
+  });
+stream
+  .pipe(iconv.decodeStream('win1251'))
+  .pipe(csvStream);
 
 let data = {
   name: "test",
@@ -38,7 +39,9 @@ router.get('/', function(req, res, next) {
 
   console.log(parsedData);
 
-  res.render('test', {data: parsedData});
+  res.render('test', {
+    data: parsedData
+  });
 });
 //
 module.exports = router;

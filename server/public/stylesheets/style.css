@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+td {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
