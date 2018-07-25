@@ -2,17 +2,25 @@ var express = require('express');
 var router = express.Router();
 var csv = require('fast-csv');
 var fs = require('fs');
+var iconv = require('iconv-lite');
+// var Buffer = require('buffer');
+// var Iconv  = require('iconv').Iconv();
+// var iconv = new Iconv('windows-1252', 'UTF8');
 
 let parsedData = [];
 
 
 //, {encoding: "utf8"}
-  let stream = fs.createReadStream("my1.csv", { encoding: 'ascii' });
+  let stream = fs.createReadStream("my1.csv", { encoding: 'binary' });
   let csvStream = csv
       .parse({delimiter:';'})
       .on("data", function(data){
-           console.log(data);
+           // console.log(data);
            parsedData.push(data);
+           let dataBin = iconv.decode(data, "binary");
+           let dataWin1252 = iconv.decode(dataBin, "win1251");
+           console.log(dataWin1252);
+           
       })
       .on("end", function(){
            console.log("done");
