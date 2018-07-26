@@ -1,14 +1,24 @@
 extends layout
 
 block content
-  h1 Тест CSV
-  div.table-responsive
-    table.table.table-bordered.table-hover.table-sm.table-dark
-      tr
-        each item, index in data[0]
-          th= index
-        
-      each item in data
-        tr
-          each sub in item
-            td(style='min-width:150px;')=sub
+  div.row
+    div.col
+      h1 Тест CSV
+  div.row.mb-3
+    div.col
+      div.card
+        div.card-body
+          h4 Информация о файле
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  div.row
+    div.col      
+      div.table-responsive
+        table.table.table-bordered.table-hover.table-sm.table-dark
+          tr
+            each item, index in data[0]
+              th= index
+            
+          each item in data
+            tr
+              each sub in item
+                td(style='min-width:150px;')=sub

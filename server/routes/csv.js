@@ -12,7 +12,7 @@ let parsedData = [];
 
 
 
-let stream = fs.createReadStream("my1.csv");
+let stream = fs.createReadStream("my2.csv");
 let csvStream = csv
   .parse({
     delimiter: ';',
