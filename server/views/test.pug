@@ -9,7 +9,11 @@ block content
       div.card
         div.card-body
           h4 Информация о файле
-          p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aliquid cumque, esse distinctio voluptates quaerat asperiores odio ullam! Repellat error accusantium est perspiciatis amet voluptates beatae, culpa nesciunt molestias veniam.
+          p= info.message
+          p
+            ul
+              each header in info.headers
+                li=header.name
   div.row
     div.col      
       div.table-responsive
@@ -21,4 +25,4 @@ block content
           each item in data
             tr
               each sub in item
-                td(style='min-width:150px;')=sub
+                td(style='min-width:150px;S')=sub

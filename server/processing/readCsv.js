@@ -4,11 +4,7 @@ var csv = require('fast-csv');
 var fs = require('fs');
 var iconv = require('iconv-lite');
 
-
-
-
-module.exports = function readCsv(filename, encoding){
-
+let readCsv = (filename, encoding) => {
   let parsedData = [];
   let message = 'Пусто';
 
@@ -32,4 +28,7 @@ module.exports = function readCsv(filename, encoding){
     .pipe(csvStream);
 
   return parsedData;
-}
+};
+
+
+module.exports = readCsv;
