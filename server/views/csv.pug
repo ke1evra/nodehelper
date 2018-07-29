@@ -1,14 +1,17 @@
 extends layout
 
 block content
-  div.row
+  div.row.mb-3
     div.col
-      h1 Тест CSV
+      h1 Обработка CSV файла
+      form.form(action="/csv/config/create" method="POST")
+        button.btn.btn-primary(type="sybmit") Создать
   div.row.mb-3
     div.col
       div.card
         div.card-body
           h4 Информация о файле
+          
           p= info.message
           p
             ul

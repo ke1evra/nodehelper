@@ -5,7 +5,8 @@ module.exports = function explore(data){
     info.headers.push({
       name: title
     })
-  }
+  };
+
   info.message = `Тест подключения своего модуля. data.length = ${data.length}`;
   // console.log(message);
   return info;
