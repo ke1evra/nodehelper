@@ -15,6 +15,16 @@ router.get('/', function(req, res, next) {
   // let data = readCsv('my2.csv','win1251');
   info = explore(data);
   // console.log(data);
+  fs.stat('config/csv1.json', function(err, stat) {
+    if(err == null) {
+        console.log('File exists');
+    } else if(err.code == 'ENOENT') {
+        console.log('file does not exist'); 
+        // fs.writeFile('log.txt', 'Some log\n');
+    } else {
+        console.log('Some other error: ', err.code);
+    }
+  });
 
   res.render('csv', {
     data: data,
@@ -95,7 +105,7 @@ router.post('/config/save', function(req, res, next) {
     fs.writeFileSync('config/csv.json', json, 'utf8');
     // console.log(r);
     res.redirect('/csv/config/edit');
-  
+
 
 });
 //
