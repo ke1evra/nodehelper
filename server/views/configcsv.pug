@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  div.row.mb-3
+    div.col
+      h1 Обработка CSV файла
+  div.row.mb-3
+    div.col
+    
+      div.table-responsive
+        form.form(action="/csv/config/save" method="POST")
+          p
+            button.btn.btn-success.mr-3(type="sybmit") Сохранить
+            a.btn.btn-outline-secondary(href="/csv") Отмена
+          table.table.table-bordered.table-hover.table-sm.table-dark
+            thead
+              tr
+                th Заголовок
+                th Значание
+            tbody
+            for header in data.csv
+              tr
+                td= header.name
+                td 
+                  div.form-group.mb-0
+                  select.form-control(name=`${header.name}`)
+                    for item in data.options
+                      if (item.name == header.name)
+                        option(name=`${item.value}` value=`${item.value}` title=`${item.name}` selected="selected")= item.value
+                      else
+                        option(name=`${item.value}` value=`${item.value}` title=`${item.name}`)= item.value
+        

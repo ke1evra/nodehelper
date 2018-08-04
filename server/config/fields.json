@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Название товара",
+        "field": "name"
+    },
+    {
+        "name": "Короткое описание товара",
+        "field": "desc_short"
+    },
+    {
+        "name": "Полное описание товара",
+        "field": "desc_full"
+    },
+    {
+        "name": "Скрыт ли товар на сайте?",
+        "field": "hidden"
+    },
+    {
+        "name": "Артикул",
+        "field": "art_number"
+    },
+    {
+        "name": "Цена продажи, без учёта скидок",
+        "field": "price_no_discount"
+    },
+    {
+        "name": "Старая цена",
+        "field": "price_old"
+    },
+    {
+        "name": "Закупочная цена",
+        "field": "price_we_buy"
+    },
+    {
+        "name": "Остаток",
+        "field": "count"
+    },
+    {
+        "name": "Ед. измерения",
+        "field": "unit"
+    },
+    {
+        "name": "Изображения товара",
+        "field": "img"
+    },
+    {
+        "name": "Короткое SEO описание товара",
+        "field": "desc_short_seo"
+    },
+    {
+        "name": "Полное SEO описание товара",
+        "field": "desc_full_seo"
+    },
+    {
+        "name": "Заголовок страницы товара",
+        "field": "title"
+    },
+    {
+        "name": "Мета-тег keywords",
+        "field": "meta_keywords"
+    },
+    {
+        "name": "Мета-тег description",
+        "field": "meta_desc"
+    },
+    {
+        "name": "URL переменная пути",
+        "field": "url"
+    },
+    {
+        "name": "Описание модификации товара",
+        "field": "desc_modif"
+    },
+    {
+        "name": "Идентификатор товара в магазине",
+        "field": "id_store"
+    },
+    {
+        "name": "Пользовательский идентификатор товара",
+        "field": "id_user"
+    },
+    {
+        "name": "Название св-ва для модификации товара №1",
+        "field": "mod_name"
+    },
+    {
+        "name": "Значение св-ва для модификации товара №1",
+        "field": "mod_value"
+    },
+    {
+        "name": "Название х-ки товара №1",
+        "field": "prop_name"
+    },
+    {
+        "name": "Значение х-ки товара №1",
+        "field": "prop_value"
+    }
+]
