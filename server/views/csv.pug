@@ -4,19 +4,32 @@ block content
   div.row.mb-3
     div.col
       h1 Обработка CSV файла
-      form.form(action="/csv/config/create" method="POST")
-        button.btn.btn-primary(type="sybmit") Создать
-  div.row.mb-3
+      if (config)
+        p Найден файл конфигурации.
+        p
+          a.btn.btn-primary(href="/csv/config/edit") Редактировать
+      else
+        form.form(action="/csv/config/create" method="POST")
+          button.btn.btn-primary(type="sybmit") Создать      
+        
+  div.row
     div.col
-      div.card
-        div.card-body
-          h4 Информация о файле
-          
-          p= info.message
-          p
-            ul
-              each header in info.headers
-                li=header.name
+      h4 Информация о файле
+      div.table-responsive
+        table.table.table-bordered.table-hover.table-sm.table-dark.table-striped
+          thead
+            tr
+              th Заголовок
+              th #
+          tbody
+            each header in info.headers
+              tr
+                td=header.name
+                if (header.header != "unused")
+                  td(class="bg-info")=header.header
+                else
+                  td=header.header
+              
   div.row
     div.col      
       div.table-responsive

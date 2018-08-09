@@ -3,7 +3,8 @@ module.exports = function explore(data){
   info.headers = []
   for(let title in data[0]){
     info.headers.push({
-      name: title
+      name: title,
+      header: 'Не определен'
     })
   };
 

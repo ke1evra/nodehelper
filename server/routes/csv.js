@@ -3,33 +3,95 @@ var router = express.Router();
 var readCsv = require('../processing/readCsv');
 var explore = require('../processing/explore');
 var fs = require('fs');
+var colors = require('colors');
 
 let data = readCsv('my2.csv','win1251');
 let info ={};
 // let data = [];
+// set DEBUG=myapp:* & nodemon --ignore './config/' --exec npm start
 
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   console.log('обращение');
   // let data = readCsv('my2.csv','win1251');
-  info = explore(data);
+
   // console.log(data);
-  fs.stat('config/csv1.json', function(err, stat) {
+  fs.stat('config/csv.json', function(err, stat) {
     if(err == null) {
         console.log('File exists');
+        info.headers = JSON.parse(fs.readFileSync("config/csv.json", "utf8"));
+        info.props = [];
+        info.mods = [];
+        info.vals = [];
+        // console.log(info);
+        let split = (str) =>{
+          var newstring = str.split("№");
+          return newstring;
+        }
+        for (let header of info.headers){
+          if (header.header == 'prop_name'){
+
+            console.log(`Найден prop_name - ${header.name.cyan}`);
+            info.props.push({
+              header: header.header,
+              name: split(header.name)[0]
+            });
+            
+          }
+          else if (header.header == 'prop_value'){
+            console.log(`Найден prop_value - ${header.name.cyan}`);
+            info.props.push({
+              header: header.header,
+              name: split(header.name)[0]
+            });
+          }
+          else if (header.header == 'mod_name'){
+            console.log(`Найден mod_name - ${header.name.cyan}`);
+            info.props.push({
+              header: header.header,
+              name: split(header.name)[0]
+            });
+          }
+          else if (header.header == 'mod_value'){
+            console.log(`Найден mod_value - ${header.name.cyan}`);
+            info.props.push({
+              header: header.header,
+              name: split(header.name)[0]
+            });
+          }
+
+          if (header.header == 'unused'){
+            for(let property of info.props){
+              if (header.name.indexOf(property.name)!=-1){
+                console.log(`Найден ${property.header.yellow} - ${header.name.cyan}`);
+              }
+            }
+
+
+          }
+          // console.log(header.header);
+        }
+        res.render('csv', {
+          data: data,
+          info: info,
+          config: true
+        });
     } else if(err.code == 'ENOENT') {
-        console.log('file does not exist'); 
-        // fs.writeFile('log.txt', 'Some log\n');
+        console.log('file does not exist');
+        info = explore(data);
+        console.log(info);
+        res.render('csv', {
+          data: data,
+          info: info,
+          config: false
+        });
     } else {
         console.log('Some other error: ', err.code);
     }
   });
 
-  res.render('csv', {
-    data: data,
-    info: info
-  });
+
 });
 
 router.get('/config/edit', function(req, res, next) {
@@ -104,7 +166,7 @@ router.post('/config/save', function(req, res, next) {
     let json = JSON.stringify(headers, null, 4);
     fs.writeFileSync('config/csv.json', json, 'utf8');
     // console.log(r);
-    res.redirect('/csv/config/edit');
+    res.redirect('/csv');
 
 
 });
